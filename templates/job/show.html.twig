@@ -7,11 +7,18 @@
 <h1>entreprise {{job.getCompany}}</h1><br>
 <h1> {{job.getDescription()}}</h1><br>
 <h2>Date d'expiration: {{ job.getExpiresAt() | date ('d-m-Y') }}</h2>
-{% endblock %}
+
+
+<h3>Condidateures<h3/>
+<ul class="nav nav-pills  nav-stacked">
+{% for Candidature in listCandidatures %}
+<h4> Condidat </
 
   {% block javascripts %}
-<script type ="text/javascript" src="{{asset("js/app.js")}}"/>  
+  <script type ="text/javascript" src="{{asset("js/app.js")}}" />  
+   </script>  
+   {% endblcok %}
 
-</script>  
-   {% endblock %}
+ 
+{% endblock %}
 

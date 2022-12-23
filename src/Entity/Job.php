@@ -4,29 +4,48 @@ namespace App\Entity;
 
 use App\Repository\JobRepository;
 use Doctrine\ORM\Mapping as ORM;
-
-#[ORM\Entity(repositoryClass: JobRepository::class)]
+use App\Entity\Image;
+/**
+ * @ORM\Entity(repositoryClass=JobRepository::class)
+ */
 class Job
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
+    private $id;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $type = null;
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $type;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $Company = null;
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $company;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $Description = null;
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description;
 
-    #[ORM\Column(nullable: true)]
-    private ?\DateTimeImmutable $Expires_at = null;
+    /**
+     * @ORM\Column(type="datetime_immutable")
+     */
+    private $expires_at;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $email = null;
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $email;
+    /**
+* @ORM\OneToOne(targetEntity="Image",cascade={"persist"})
+* @ORM\JoinColumn(nullable=true)
+*/
+private $image;
 
     public function getId(): ?int
     {
@@ -38,7 +57,7 @@ class Job
         return $this->type;
     }
 
-    public function setType(?string $type): self
+    public function setType(string $type): self
     {
         $this->type = $type;
 
@@ -47,36 +66,36 @@ class Job
 
     public function getCompany(): ?string
     {
-        return $this->Company;
+        return $this->company;
     }
 
-    public function setCompany(?string $Company): self
+    public function setCompany(string $company): self
     {
-        $this->Company = $Company;
+        $this->company = $company;
 
         return $this;
     }
 
     public function getDescription(): ?string
     {
-        return $this->Description;
+        return $this->description;
     }
 
-    public function setDescription(?string $Description): self
+    public function setDescription(?string $description): self
     {
-        $this->Description = $Description;
+        $this->description = $description;
 
         return $this;
     }
 
     public function getExpiresAt(): ?\DateTimeImmutable
     {
-        return $this->Expires_at;
+        return $this->expires_at;
     }
 
-    public function setExpiresAt(?\DateTimeImmutable $Expires_at): self
+    public function setExpiresAt(\DateTimeImmutable $expires_at): self
     {
-        $this->Expires_at = $Expires_at;
+        $this->expires_at = $expires_at;
 
         return $this;
     }
@@ -86,9 +105,21 @@ class Job
         return $this->email;
     }
 
-    public function setEmail(?string $email): self
+    public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getImage(): ?Image
+    {
+        return $this->image;
+    }
+
+    public function setImage(?Image $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

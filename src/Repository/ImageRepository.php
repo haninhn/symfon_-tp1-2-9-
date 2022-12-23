@@ -21,7 +21,7 @@ class ImageRepository extends ServiceEntityRepository
         parent::__construct($registry, Image::class);
     }
 
-    public function save(Image $entity, bool $flush = false): void
+    public function add(Image $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 

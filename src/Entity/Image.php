@@ -1,23 +1,30 @@
 <?php
-
 namespace App\Entity;
 
 use App\Repository\ImageRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ImageRepository::class)]
+/**
+ * @ORM\Entity(repositoryClass=ImageRepository::class)
+ */
 class Image
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
+    private $id;
 
-    #[ORM\Column(length: 255)]
-    private ?string $url = null;
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $url;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $alt = null;
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $alt;
 
     public function getId(): ?int
     {
@@ -41,7 +48,7 @@ class Image
         return $this->alt;
     }
 
-    public function setAlt(?string $alt): self
+    public function setAlt(string $alt): self
     {
         $this->alt = $alt;
 
